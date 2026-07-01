@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { socket } from '../lib/socket';
 import { useLocalMedia } from '../hooks/useLocalMedia';
@@ -168,29 +167,21 @@ export function Booth({ polite, partnerLeft, onExit }: Props) {
         )}
 
         {/* countdown overlay */}
-        <AnimatePresence>
-          {count !== null && (
-            <motion.div
-              key={`${shotIdx}-${count}`}
-              initial={{ scale: 0.4, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 1.6, opacity: 0 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
-            >
-              <span className="font-display text-[9rem] font-bold leading-none text-cream drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)]">
-                {count === 0 ? '♥' : count}
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {count !== null && (
+          <div
+            key={`${shotIdx}-${count}`}
+            className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
+          >
+            <span className="count-pop font-display text-[9rem] font-bold leading-none text-cream drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)]">
+              {count === 0 ? '♥' : count}
+            </span>
+          </div>
+        )}
 
         {/* shutter flash */}
-        <motion.div
-          animate={{ opacity: flash ? 0.9 : 0 }}
-          transition={{ duration: flash ? 0.05 : 0.4 }}
-          className="pointer-events-none absolute inset-0 z-30 rounded-2xl bg-white"
-        />
+        {flash && (
+          <div className="shutter-flash pointer-events-none absolute inset-0 z-30 rounded-2xl bg-white" />
+        )}
       </div>
 
       {/* controls */}

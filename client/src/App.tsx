@@ -31,20 +31,13 @@ export default function App() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log('[4cut] screen ->', screen);
-  }, [screen]);
-
   const handleCreate = () => {
-    console.log('[4cut] handleCreate');
     setError(null);
     socket.emit('create', (res: { ok: boolean; code: string; polite: boolean }) => {
-      console.log('[4cut] create ack', JSON.stringify(res));
       if (res?.ok) {
         setCode(res.code);
         setPolite(res.polite);
         setScreen('waiting');
-        console.log('[4cut] setScreen(waiting) invoked');
       }
     });
   };

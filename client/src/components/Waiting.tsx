@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Marquee } from './Marquee';
 
 interface Props {
@@ -75,10 +74,9 @@ export function Waiting({ code, onCancel }: Props) {
 
 function Dot({ delay }: { delay: number }) {
   return (
-    <motion.span
-      className="inline-block h-1.5 w-1.5 rounded-full bg-mustard"
-      animate={{ opacity: [0.2, 1, 0.2] }}
-      transition={{ duration: 1.2, repeat: Infinity, delay }}
+    <span
+      className="dot-pulse inline-block h-1.5 w-1.5 rounded-full bg-mustard"
+      style={{ animationDelay: `${delay}s` }}
     />
   );
 }

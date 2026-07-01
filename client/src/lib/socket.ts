@@ -5,8 +5,3 @@ import { io, type Socket } from 'socket.io-client';
 export const socket: Socket = io({
   autoConnect: true,
 });
-
-// Debug hook (harmless in prod): lets us inspect the live socket from devtools.
-if (typeof window !== 'undefined') {
-  (window as unknown as { __socket: Socket }).__socket = socket;
-}
