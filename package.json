@@ -1,0 +1,21 @@
+{
+  "name": "couples-photobooth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A real-time couples photobooth — synced 4-cut strips for long-distance dates.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,client -c magenta,cyan \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "node --watch server/index.js",
+    "dev:client": "npm run dev --workspace client",
+    "build": "npm run build --workspace client",
+    "start": "node server/index.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #141414;
+  color: #f3e9d8;
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Mirror the local camera preview so it feels like a mirror / selfie. */
+.mirror {
+  transform: scaleX(-1);
+}
+
+/* Perforated film-strip edge used to frame the live view. */
+.sprocket-edge {
+  background-image: radial-gradient(
+    circle at center,
+    #0b0b0b 0,
+    #0b0b0b 5px,
+    transparent 6px
+  );
+  background-size: 100% 26px;
+  background-repeat: repeat-y;
+}
+
+/* Enter / accent animations. Transform-only where possible so content stays
+   visible even if the animation never plays (no opacity gating). */
+@keyframes screenEnter {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.screen-enter {
+  animation: screenEnter 0.32s ease-out;
+}
+
+@keyframes countPop {
+  from {
+    transform: scale(1.35);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.count-pop {
+  animation: countPop 0.3s ease-out;
+}
+
+@keyframes shutterFlash {
+  from {
+    opacity: 0.92;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.shutter-flash {
+  animation: shutterFlash 0.34s ease-out forwards;
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.dot-pulse {
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes develop {
+  from {
+    filter: brightness(1.8) contrast(0.5) saturate(0.4);
+  }
+  to {
+    filter: none;
+  }
+}
+.develop {
+  animation: develop 0.9s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

@@ -1,0 +1,19 @@
+# Render Blueprint — one free web service that serves the built client and the
+# Socket.IO signaling server. Deploy: push to GitHub, then "New + > Blueprint".
+services:
+  - type: web
+    name: couples-photobooth
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Optional TURN relay for restrictive networks (leave unset to use STUN only):
+      # - key: TURN_URL
+      #   value: turn:your-turn-host:3478
+      # - key: TURN_USERNAME
+      #   sync: false
+      # - key: TURN_CREDENTIAL
+      #   sync: false
